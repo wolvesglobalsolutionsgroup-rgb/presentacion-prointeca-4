@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROINTECA v4 - Presentación Ejecutiva 2026</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Inter:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- GSAP for Premium Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --bg-surface: #0f172a;
+            --primary: #3b82f6;
+            --primary-bright: #60a5fa;
+            --primary-glow: rgba(59, 130, 246, 0.4);
+            --accent: #10b981;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --glass: rgba(15, 23, 42, 0.8);
+            --border: rgba(255, 255, 255, 0.1);
+
+            --title-size: clamp(2.5rem, 8vw, 5.5rem);
+            --h2-size: clamp(2rem, 5vw, 3.5rem);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--bg-deep);
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* --- Global Layout --- */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 8%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-wrapper {
+            max-width: 1300px;
+            width: 100%;
+            z-index: 10;
+        }
+
+        /* --- Background Decor --- */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/terminal_2026.png') center/cover no-repeat;
+            opacity: 0.4;
+            z-index: 1;
+            filter: brightness(0.6);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-deep) 80%);
+            z-index: 2;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(100px);
+            z-index: 0;
+            opacity: 0.2;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* --- Components --- */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 4rem;
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 1.4rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--primary-glow);
+            color: var(--primary-bright);
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #3b82f6 50%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-shift 5s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* --- Custom Table Styles --- */
+        .comp-table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.3);
+        }
+
+        .comp-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .comp-table th {
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--primary-bright);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comp-table td {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .comp-prointeca {
+            color: var(--accent);
+            font-weight: 700;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        /* --- COMPETITOR FAILURE ANALYSIS --- */
+        #competitors {
+            background: linear-gradient(to bottom, var(--bg-deep), #0c0a21);
+            position: relative;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .metric-card {
+            padding: 2.5rem;
+            border-radius: 24px;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 320px;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            opacity: 0.5;
+            z-index: 5;
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                top: 0;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        .metric-card::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary);
+            background: rgba(15, 23, 42, 0.8);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .metric-card:hover::after {
+            opacity: 0.3;
+        }
+
+        .diag-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            display: block;
+            font-weight: 800;
+        }
+
+        .metric-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .metric-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .failure-tag {
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            align-self: flex-start;
+            text-transform: uppercase;
+        }
+
+        .success-tag {
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            align-self: flex-start;
+            text-transform: uppercase;
+        }
+
+        /* --- Logo Collage --- */
+        .logo-collage {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 32px;
+            border: 1px solid var(--border);
+        }
+
+        .logo-item {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo-item:hover {
+            transform: scale(1.1) rotate(2deg);
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(1) brightness(1.5);
+            transition: all 0.4s ease;
+        }
+
+        .logo-item:hover img {
+            filter: grayscale(0) brightness(1);
+        }
+
+        /* --- Navigation --- */
+        .nav-overlay {
+            position: fixed;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .nav-dot.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+            transform: scale(1.5);
+        }
+
+        /* --- Section Transitions --- */
+        .section-title {
+            font-size: var(--h2-size);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Year 2026 Special --- */
+        .year-tag {
+            font-size: 6rem;
+            font-weight: 900;
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            opacity: 0.05;
+            color: var(--primary);
+            pointer-events: none;
+        }
+
+        /* --- Chronology --- */
+        .chronology {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .chrono-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 2rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .chrono-item:hover {
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateX(10px);
+        }
+
+        .chrono-year {
+            font-weight: 900;
+            color: var(--primary-bright);
+            font-size: 1.2rem;
+        }
+
+        .date-stamp {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-family: 'Outfit';
+            font-weight: 800;
+            color: var(--primary);
+            opacity: 0.3;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 900px) {
+            section {
+                padding: 60px 5%;
+            }
+
+            .glass-card {
+                padding: 2rem 1.5rem;
+                border-radius: 24px;
+            }
+
+            .nav-overlay {
+                display: none;
+            }
+
+            .chrono-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            /* Finance Section Mobile Optimizations */
+            #finance .content-wrapper > .glass-card {
+                padding: 1.5rem;
+            }
+
+            #finance .glass-card > div[style*="display: grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+
+            /* Responsive Table for Comparison */
+            .glass-card div[style*="grid-template-columns: repeat(4, 1fr)"] {
+                grid-template-columns: 1fr 1fr !important;
+                font-size: 0.7rem;
+            }
+
+            /* Saldo Pendiente Card Mobile */
+            div[style*="padding: 3rem; border: 1px solid rgba(16, 185, 129, 0.4)"] {
+                flex-direction: column !important;
+                padding: 2rem 1.5rem !important;
+                text-align: center !important;
+                gap: 2rem !important;
+            }
+
+            div[style*="padding: 3rem; border: 1px solid rgba(16, 185, 129, 0.4)"] > div:last-child {
+                text-align: center !important;
+            }
+
+            div[style*="font-size: 4.5rem;"] {
+                font-size: 3.5rem !important;
+                justify-content: center !important;
+            }
+
+            /* Hero Section Mobile */
+            #hero .content-wrapper > div[style*="display: inline-flex"] {
+                flex-direction: column !important;
+                gap: 1.5rem !important;
+                padding: 1.5rem !important;
+                width: 90%;
+            }
+
+            #hero .content-wrapper > div[style*="display: inline-flex"] > div[style*="width: 1px"] {
+                width: 100% !important;
+                height: 1px !important;
+            }
+
+            /* Technical Handover Grid */
+            #handover .metrics-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Lighthouse Grid */
+            #lighthouse div[style*="grid-template-columns: repeat(4, 1fr)"] {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 1rem !important;
+            }
+            
+            /* Logo Collage Mobile */
+            .logo-collage {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                padding: 1.5rem;
+                gap: 1rem;
+            }
+        }
+
+        /* Smallest screens (iPhone SE, etc) */
+        @media (max-width: 380px) {
+            div[style*="font-size: 4.5rem;"], 
+            div[style*="font-size: 3.5rem;"] {
+                font-size: 2.8rem !important;
+            }
+            
+            .section-title {
+                font-size: 1.8rem !important;
+            }
+        }
+
+        /* --- Print Styles Optimized --- */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+
+            html,
+            body {
+                background: #020617 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                width: 100%;
+                overflow: visible !important;
+            }
+
+            section {
+                min-height: 100vh !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                display: flex !important;
+                flex-direction: column;
+                justify-content: center;
+                padding: 5% !important;
+                margin: 0 !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+            }
+
+            .nav-overlay,
+            .nav-dot,
+            .print-btn-float,
+            .date-stamp,
+            .hero-bg,
+            .hero-overlay {
+                display: none !important;
+            }
+
+            .glass-card {
+                break-inside: avoid !important;
+                background: rgba(15, 23, 42, 0.95) !important;
+                border: 1px solid rgba(59, 130, 246, 0.3) !important;
+                box-shadow: none !important;
+                color: #fff !important;
+            }
+
+            .gradient-text {
+                background: none !important;
+                -webkit-text-fill-color: #3b82f6 !important;
+                color: #3b82f6 !important;
+            }
+
+            .section-title {
+                color: #fff !important;
+            }
+
+            p,
+            td,
+            li {
+                color: #94a3b8 !important;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #fff !important;
+            }
+
+            .section-title,
+            .badge,
+            .gradient-text,
+            .metric-card,
+            .asset-box,
+            tr,
+            .glass-card {
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+            }
+        }
+
+        /* --- Floating Print Button --- */
+        .print-btn-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Outfit';
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .print-btn-float:hover {
+            transform: translateY(-5px);
+            background: var(--primary-bright);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="nav-overlay">
+        <div class="nav-dot active" data-target="hero" title="Inicio"></div>
+        <div class="nav-dot" data-target="competitors" title="Auditoría Forense"></div>
+        <div class="nav-dot" data-target="assets" title="Patrimonio Digital"></div>
+        <div class="nav-dot" data-target="lighthouse" title="Certificación de Calidad"></div>
+        <div class="nav-dot" data-target="geo" title="Estrategia IA"></div>
+        <div class="nav-dot" data-target="chronology" title="Cronología"></div>
+        <div class="nav-dot" data-target="finance" title="Valuación Técnica"></div>
+        <div class="nav-dot" data-target="handover" title="Protocolo de Entrega"></div>
+        <div class="nav-dot" data-target="closure" title="Cierre de Proyecto"></div>
+    </div>
+
+    <button class="print-btn-float"
+        onclick="alert('IMPORTANTE: Para un PDF perfecto, asegúrate de activar la casilla [Gráficos de fondo] en los ajustes de impresión y selecciona Diseño [Horizontal].'); window.print()">
+        <span>🖨️</span> Exportar a PDF
+    </button>
+
+    <div class="presentation-container">
+
+        <!-- HERO SECTION -->
+        <section id="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="content-wrapper" style="text-align: center;">
+                <span class="badge"><span style="color: var(--accent);">●</span> Presentación de Liquidación V4.0</span>
+                <h1 class="gradient-text"
+                    style="font-size: var(--title-size); font-weight: 950; margin-bottom: 1rem; letter-spacing: -0.02em;">
+                    PROINTECA <span style="color: var(--primary);">2026</span>
+                </h1>
+                <p class="font-heading"
+                    style="font-size: 1.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.3em; margin-bottom: 4rem;">
+                    Ingeniería Digital & Restauración de Activos
+                </p>
+
+                <div
+                    style="display: inline-flex; gap: 4rem; padding: 2rem 4rem; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid var(--border);">
+                    <div>
+                        <p
+                            style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem;">
+                            Responsable</p>
+                        <p style="font-weight: 700; color: var(--primary-bright);">Ing. Freddy Rodriguez Perez</p>
+                    </div>
+                    <div style="width: 1px; background: var(--border);"></div>
+                    <div>
+                        <p
+                            style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem;">
+                            Estado Operativo</p>
+                        <p style="font-weight: 700; color: var(--accent);">Listo para Entrega</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUDITORÍA FORENSE / COMPETITOR ANALYSIS -->
+        <section id="competitors" style="background: linear-gradient(to bottom, var(--bg-deep), #0c0a21);">
+            <div class="content-wrapper">
+                <span class="badge"
+                    style="border-color: var(--danger); color: var(--danger); background: rgba(239, 68, 68, 0.05);">Auditoría
+                    Forense de Mercado</span>
+                <h2 class="section-title">Superioridad Técnica & Análisis de Riesgo</h2>
+                <p style="color: var(--text-dim); margin-bottom: 3rem; max-width: 800px;">
+                    Diagnóstico de fallas críticas en competidores locales vs. la robustez de Prointeca V4. Un sitio
+                    obsoleto es un riesgo de seguridad y reputación.
+                </p>
+
+                <div class="comp-table-container">
+                    <table class="comp-table">
+                        <thead>
+                            <tr>
+                                <th>Criterio Técnico</th>
+                                <th>Estado Competencia (2026)</th>
+                                <th>PROINTECA V4 (2026)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Velocidad de Carga (LCP)</td>
+                                <td style="color: var(--danger);">5.8s - Latencia Crítica</td>
+                                <td class="comp-prointeca">0.8s - Velocidad Luz</td>
+                            </tr>
+                            <tr>
+                                <td>Optimización para IA (GEO)</td>
+                                <td style="color: var(--text-dim);">Nula / No Indexable</td>
+                                <td class="comp-prointeca">100% - Authority Status</td>
+                            </tr>
+                            <tr>
+                                <td>Seguridad de Activos</td>
+                                <td style="color: var(--danger);">Vulnerable / Insegura</td>
+                                <td class="comp-prointeca">SSL Grade A+ / Blindado</td>
+                            </tr>
+                            <tr>
+                                <td>Fidelidad de Marca</td>
+                                <td style="color: var(--text-dim);">Pixelada / Obsoleta</td>
+                                <td class="comp-prointeca">4K Vectorial / Master</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="scan-line"></div>
+                        <div>
+                            <span class="diag-label">Auditoría de UX #001</span>
+                            <h3 style="font-size: 1.4rem;">CVCONCA / RS Paginas</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-dim);">Fallas críticas de accesibilidad.
+                                Estructura rígida que ignora los estándares de navegación 2026. La competencia se quedó
+                                en el pasado.</p>
+                        </div>
+                        <span class="failure-tag">FALLA: ACCESO DENEGADO</span>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="scan-line" style="animation-delay: 1s;"></div>
+                        <div>
+                            <span class="diag-label">Auditoría de Seguridad #002</span>
+                            <h3 style="font-size: 1.4rem;">Teknacorp / Beech-Pad</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-dim);">Vulnerabilidades en formularios y
+                                latencia de carga superior a 6 segundos. Invisibilidad técnica total en motores
+                                modernos.</p>
+                        </div>
+                        <span class="failure-tag">FALLA: LATENCIA CRÍTICA</span>
+                    </div>
+
+                    <div class="metric-card" style="border-color: var(--accent); background: rgba(16, 185, 129, 0.05);">
+                        <div style="position: absolute; top: 0; right: 0; padding: 1.5rem; font-size: 2rem;">🛡️</div>
+                        <div>
+                            <span class="diag-label" style="color: var(--accent);">Veredicto Prointeca</span>
+                            <h3 style="font-size: 1.4rem; color: var(--accent);">PROINTECA V4: Liderazgo</h3>
+                            <p style="font-size: 0.85rem; color: #fff;">Optimización 360°: Seguridad, Velocidad y
+                                Legibilidad Humana/IA. El nuevo estándar industrial para Venezuela.</p>
+                        </div>
+                        <span class="success-tag">ESTADO: VANGUARDIA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASSET RESTORATION GALLERY -->
+        <section id="assets">
+            <div class="content-wrapper">
+                <span class="badge">Patrimonio Digital Restaurado</span>
+                <h2 class="section-title">Ingeniería Multimedia 4K</h2>
+                <p style="color: var(--text-dim); margin-bottom: 3rem; max-width: 800px;">
+                    Hemos salvado y modernizado el archivo histórico de Prointeca, asegurando que cada activo visual
+                    tenga fidelidad infinita en cualquier plataforma actual o futura.
+                </p>
+
+                <div class="logo-collage">
+                    <!-- Clientes Principales -->
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo-CHEVRON.webp"
+                            alt="Chevron"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20PDVSA.webp"
+                            alt="PDVSA"></div>
+                    <div class="logo-item"><img
+                            src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20PDVSA%20-%20Petrolera%20SINOVENSA.webp"
+                            alt="Sinovensa"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20INPROCCA.webp"
+                            alt="Inprocca"></div>
+                    <div class="logo-item"><img
+                            src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20PDVSA%20-%20PETROPIAR.webp"
+                            alt="Petropiar"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20RGA.webp"
+                            alt="RGA"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20WISON.webp"
+                            alt="Wison"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20HQCEC.webp"
+                            alt="HQCEC"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20DPVUCA.webp"
+                            alt="DPVUCA"></div>
+                    <div class="logo-item"><img
+                            src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20KNOB%20TRADING.webp"
+                            alt="Knob Trading"></div>
+                    <div class="logo-item"><img
+                            src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo%20-%20PDVSA%20-%20PETROCEDEÑO.webp"
+                            alt="Petrocedeno"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Clientes%20Sin%20Fondo/Logo-CVCONCA.webp"
+                            alt="CVCONCA"></div>
+
+                    <!-- Aliados Estratégicos -->
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Aliados%20Sin%20Fondo/Logo-IAMEXA.webp"
+                            alt="Iamexa"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Aliados%20Sin%20Fondo/Logo-ICAT.webp"
+                            alt="Icat"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Aliados%20Sin%20Fondo/Logo-TAMEGCA.webp"
+                            alt="Tamegca"></div>
+                    <div class="logo-item"><img src="Logos%20Nuestros%20Aliados%20Sin%20Fondo/Logo-XLI-SPECTRUM.webp"
+                            alt="XLI Spectrum"></div>
+                </div>
+
+                <div
+                    style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div
+                        style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 15px; text-align: center; border: 1px solid var(--border);">
+                        <p style="font-size: 1.2rem; font-weight: 800; color: var(--accent);">16</p>
+                        <p style="font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase;">Logos 4K</p>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 15px; text-align: center; border: 1px solid var(--border);">
+                        <p style="font-size: 1.2rem; font-weight: 800; color: var(--accent);">100%</p>
+                        <p style="font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase;">Vector Ready
+                        </p>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 15px; text-align: center; border: 1px solid var(--border);">
+                        <p style="font-size: 1.2rem; font-weight: 800; color: var(--accent);">AI</p>
+                        <p style="font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase;">Enhanced</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIGHTHOUSE / PERFORMANCE CERTIFICATION -->
+        <section id="lighthouse" style="background: var(--bg-deep);">
+            <div class="content-wrapper">
+                <span class="badge" style="border-color: var(--accent); color: var(--accent);">Certificación de
+                    Excelencia</span>
+                <h2 class="section-title">Google PageSpeed Insights</h2>
+                <p style="color: var(--text-dim); margin-bottom: 3rem; max-width: 800px;">
+                    Resultados de auditoría técnica que garantizan que Prointeca V4 es más rápida y accesible que el 95%
+                    de los sitios web industriales en Venezuela.
+                </p>
+
+                <!-- Report Image removed as requested (broken link) -->
+                <div style="width: 100%; margin-bottom: 3rem;">
+                    <img src="assets/pagespeed_2026.png" alt="Google PageSpeed Insights Results 2026"
+                        style="width: 100%; border-radius: 24px; border: 1px solid var(--border); margin-bottom: 2rem; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+
+                    <div style="display: flex; justify-content: center;">
+                        <a href="https://pagespeed.web.dev/analysis/https-prointeca-v4-vercel-app/exq2twmju0?form_factor=desktop"
+                            target="_blank" class="cta-button"
+                            style="background: var(--accent); color: #000; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 900; text-decoration: none; display: flex; align-items: center; gap: 12px; transition: all 0.3s ease; box-shadow: 0 15px 40px rgba(16, 185, 129, 0.3);">
+                            <span style="font-size: 0.9rem;">VERIFICAR AUDITORÍA EN VIVO</span>
+                            <span style="font-size: 1.2rem;">↗</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; width: 100%;">
+                    <div
+                        style="text-align: center; background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 20px; border: 1px solid var(--border);">
+                        <div style="font-size: 2.5rem; font-weight: 950; color: #22c55e;">98</div>
+                        <p
+                            style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">
+                            Performance</p>
+                    </div>
+                    <div
+                        style="text-align: center; background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 20px; border: 1px solid var(--border);">
+                        <div style="font-size: 2.5rem; font-weight: 950; color: #22c55e;">100</div>
+                        <p
+                            style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">
+                            Accessibility</p>
+                    </div>
+                    <div
+                        style="text-align: center; background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 20px; border: 1px solid var(--border);">
+                        <div style="font-size: 2.5rem; font-weight: 950; color: #22c55e;">100</div>
+                        <p
+                            style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">
+                            Best Practices</p>
+                    </div>
+                    <div
+                        style="text-align: center; background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 20px; border: 1px solid var(--border);">
+                        <div style="font-size: 2.5rem; font-weight: 950; color: #22c55e;">100</div>
+                        <p
+                            style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">
+                            SEO</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    </section>
+
+    <!-- (Competitor analysis merged above, section removed here) -->
+
+    <!-- GEO / AI STRATEGY -->
+    <section id="geo">
+        <div class="blob"
+            style="width: 500px; height: 500px; background: var(--primary-glow); bottom: -10%; left: -10%;"></div>
+        <div class="content-wrapper" style="text-align: center;">
+            <span class="badge">Innovación Estratégica</span>
+            <h2 class="section-title">Preparados para la Era de la IA</h2>
+            <p style="max-width: 800px; margin: 0 auto 4rem auto; color: var(--text-dim);">
+                Prointeca v4 no es solo una web; es una base de datos semántica. Hemos implementado <strong>GEO
+                    (Generative Engine Optimization)</strong> para que las IAs recomienden a Prointeca como la autoridad
+                principal en servicios petroleros en Venezuela.
+            </p>
+
+            <div class="metrics-grid">
+                <div class="metric-card" style="min-height: auto; padding: 2rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔍</div>
+                    <h3 style="font-size: 1.4rem;">Discovery Optimization</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0;">Estructura optimizada para
+                        que ChatGPT, Gemini y Claude identifiquen a Prointeca como líder sectorial.</p>
+                </div>
+                <div class="metric-card" style="min-height: auto; padding: 2rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛡️</div>
+                    <h3 style="font-size: 1.4rem;">Digital Authority</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0;">Patrimonio digital blindado
+                        y semánticamente coherente para motores de búsqueda de próxima generación.</p>
+                </div>
+                <div class="metric-card" style="min-height: auto; padding: 2rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛰️</div>
+                    <h3 style="font-size: 1.4rem;">Global Edge Access</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0;">Disponibilidad 99.99% en
+                        cualquier nodo global, garantizando acceso instantáneo a documentos técnicos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHRONOLOGY SECTION -->
+    <section id="chronology">
+        <div class="date-stamp">SYSTEM STATE: ACTIVE | APRIL 2026</div>
+        <div class="content-wrapper">
+            <span class="badge">Evolución del Proyecto</span>
+            <h2 class="section-title">Cronología de Ingeniería</h2>
+            <p style="color: var(--text-dim); margin-bottom: 3rem;">Tres fases de transformación técnica que llevaron a
+                Prointeca de la obsolescencia al liderazgo digital.</p>
+
+            <div class="chronology">
+                <div class="chrono-item">
+                    <div class="chrono-year">30 Ene</div>
+                    <div>
+                        <h4 style="color: #fff;">Inicio del Proyecto & Visión Monolith</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Envío de propuesta técnica-comercial.
+                            Aprobación inmediata y definición del sistema de diseño "Precision Monolith" enfocado en
+                            rigor industrial.</p>
+                    </div>
+                </div>
+                <div class="chrono-item" style="border-color: var(--primary-bright);">
+                    <div class="chrono-year">06 Feb</div>
+                    <div>
+                        <h4 style="color: #fff;">Activos Críticos & Dominios</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Adquisición de dominios estratégicos
+                            (prointeca.com.ve / www.prointeca.com.ve) y configuración de certificados de seguridad SSL
+                            Enterprise.</p>
+                    </div>
+                </div>
+                <div class="chrono-item" style="border-color: var(--primary-bright);">
+                    <div class="chrono-year">07 Feb</div>
+                    <div>
+                        <h4 style="color: #fff;">Ecosistema Corporativo</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Implementación de correos corporativos y
+                            sincronización con infraestructura Cloud para comunicación ininterrumpida.</p>
+                    </div>
+                </div>
+                <div class="chrono-item" style="border-color: var(--primary-bright);">
+                    <div class="chrono-year">Feb-Mar</div>
+                    <div>
+                        <h4 style="color: #fff;">Desarrollo V4 & Multimedia</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Ingeniería de software intensiva.
+                            Restauración de patrimonio multimedia (Upscaling 4K de 16 logos y 100+ imágenes de portafolio) y optimización para red de
+                            bajo ancho de banda.</p>
+                    </div>
+                </div>
+                <div class="chrono-item" style="border-color: var(--accent); background: rgba(16, 185, 129, 0.03);">
+                    <div class="chrono-year" style="color: var(--accent);">Abr 2026</div>
+                    <div>
+                        <h4 style="color: var(--accent);">V4: Entrega Final & GEO</h4>
+                        <p style="font-size: 0.85rem; color: #fff;">Certificación Google PageSpeed 98/100.
+                            Implementación de estrategia GEO para indexación en IAs y liquidación final de servicios.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINANCIAL VALUATION -->
+    <section id="finance" style="background: var(--bg-surface);">
+        <div class="date-stamp">FINANCIAL STATUS: PENDING SETTLEMENT</div>
+        <div class="content-wrapper">
+            <div class="glass-card" style="padding: 3rem; position: relative; overflow: hidden;">
+                <div
+                    style="position: absolute; top: 0; right: 0; background: var(--accent); color: #000; padding: 0.5rem 2rem; transform: rotate(45deg) translate(30%, -100%); font-weight: 900; font-size: 0.7rem; letter-spacing: 0.1em;">
+                    HANDOVER 2026</div>
+
+                <h2 class="section-title">Valuación Técnica & Resumen de Inversión</h2>
+                <p style="color: var(--text-dim); margin-bottom: 3rem;">Reporte ejecutivo sobre la capitalización de
+                    activos digitales y justificación de valor del ecosistema V4.</p>
+
+                <!-- COMPARATIVA DE MERCADO -->
+                <div class="glass-card"
+                    style="margin-bottom: 3rem; padding: 2.5rem; border: 1px solid rgba(59, 130, 246, 0.2); background: rgba(0,0,0,0.2);">
+                    <h3
+                        style="font-size: 1.1rem; color: #fff; margin-bottom: 2rem; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--primary-bright);">📊</span> Comparativa de Valor: Prointeca vs
+                        Competencia Sectorial
+                    </h3>
+                    <div
+                        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+                        <!-- Header -->
+                        <div
+                            style="background: rgba(255,255,255,0.05); padding: 1rem; font-size: 0.65rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase;">
+                            Criterio</div>
+                        <div
+                            style="background: rgba(255,255,255,0.05); padding: 1rem; font-size: 0.65rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase;">
+                            Estándar Local</div>
+                        <div
+                            style="background: rgba(255,255,255,0.05); padding: 1rem; font-size: 0.65rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase;">
+                            Competidor (Sector)</div>
+                        <div
+                            style="background: rgba(59, 130, 246, 0.1); padding: 1rem; font-size: 0.65rem; font-weight: 800; color: var(--primary-bright); text-transform: uppercase;">
+                            PROINTECA V4</div>
+
+                        <!-- Row 1: Tech -->
+                        <div style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: #fff;">
+                            Tecnología Core</div>
+                        <div
+                            style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+                            WordPress / Templates</div>
+                        <div
+                            style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+                            WordPress Básico</div>
+                        <div
+                            style="background: rgba(59, 130, 246, 0.05); padding: 1rem; font-size: 0.75rem; color: #fff; font-weight: 600;">
+                            Código a Medida (React/Vercel)</div>
+
+                        <!-- Row 2: Design -->
+                        <div style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: #fff;">
+                            Impacto Visual</div>
+                        <div
+                            style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+                            Fotos Estáticas</div>
+                        <div
+                            style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+                            Slider de Fotos</div>
+                        <div
+                            style="background: rgba(59, 130, 246, 0.05); padding: 1rem; font-size: 0.75rem; color: #fff; font-weight: 600;">
+                            Video 4K + Animación GSAP</div>
+
+                        <!-- Row 3: Performance -->
+                        <div style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: #fff;">
+                            Rendimiento</div>
+                        <div
+                            style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+                            Carga Lenta (>5s)</div>
+                        <div
+                            style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+                            Host Compartido</div>
+                        <div
+                            style="background: rgba(59, 130, 246, 0.05); padding: 1rem; font-size: 0.75rem; color: var(--primary-bright); font-weight: 800;">
+                            Ultra-Rápido (CDN Edge)</div>
+
+                        <!-- Row 4: IP -->
+                        <div style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: #fff;">
+                            Propiedad Intelectual</div>
+                        <div
+                            style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+                            Atado a Desarrollador</div>
+                        <div
+                            style="background: var(--bg-surface); padding: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+                            Plugins Cerrados</div>
+                        <div
+                            style="background: rgba(59, 130, 246, 0.05); padding: 1rem; font-size: 0.75rem; color: #fff; font-weight: 600;">
+                            Repositorio Git Propio</div>
+                    </div>
+                    <p style="font-size: 0.7rem; color: var(--text-dim); margin-top: 1rem; font-style: italic;">
+                        *Análisis basado en plataformas del sector y promedios del mercado nacional 2026.</p>
+                </div>
+
+                <!-- DESGLOSE DE INVERSIÓN -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                    <!-- Inversión Contractual -->
+                    <div>
+                        <h4
+                            style="font-size: 0.8rem; text-transform: uppercase; color: var(--primary-bright); margin-bottom: 1.5rem; letter-spacing: 0.1em; font-weight: 800;">
+                            A. Inversión Contractual</h4>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.8rem 0; font-size: 0.8rem; color: var(--text-dim);">Paquete Base
+                                    Nivel 1 (Web + Correo)</td>
+                                <td style="text-align: right; font-weight: 700;">$1,950.00</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.8rem 0; font-size: 0.8rem; color: var(--text-dim);">Upgrade Opción
+                                    B (Interfaz Inmersiva 4K)</td>
+                                <td style="text-align: right; font-weight: 700;">$550.00</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem 0; font-weight: 700; color: #fff; font-size: 0.9rem;">Subtotal
+                                    Contratado</td>
+                                <td style="text-align: right; font-weight: 800; color: #fff; font-size: 0.9rem;">
+                                    $2,500.00</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Valores Agregados -->
+                    <div>
+                        <h4
+                            style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; letter-spacing: 0.1em; font-weight: 800;">
+                            B. Valores Agregados (Extras Entregados)</h4>
+                        
+                        <!-- Multimedia Detail -->
+                        <div style="margin-bottom: 1.5rem;">
+                            <p style="font-size: 0.7rem; color: #fff; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">1. Ingeniería Multimedia</p>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.75rem;">
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.4rem 0; color: var(--text-dim);">Restauración Logos (16 x $30)</td>
+                                    <td style="text-align: right; color: #fff;">$480.00</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.4rem 0; color: var(--text-dim);">Videos Hero 4K (5 x $80)</td>
+                                    <td style="text-align: right; color: #fff;">$400.00</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.4rem 0; color: var(--text-dim);">Optimización Imágenes (100 x $3.20)</td>
+                                    <td style="text-align: right; color: #fff;">$320.00</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Contact & Security Detail -->
+                        <div style="margin-bottom: 1.5rem;">
+                            <p style="font-size: 0.7rem; color: #fff; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">2. Contacto & Seguridad</p>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.75rem;">
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.4rem 0; color: var(--text-dim);">Módulo Formulario Validado</td>
+                                    <td style="text-align: right; color: #fff;">$120.00</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.4rem 0; color: var(--text-dim);">Protección Anti-Spam / Honeypot</td>
+                                    <td style="text-align: right; color: #fff;">$80.00</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.4rem 0; color: var(--text-dim);">Enrutamiento Seguro Mensajería</td>
+                                    <td style="text-align: right; color: #fff;">$50.00</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Infra & SEO Detail -->
+                        <div>
+                            <p style="font-size: 0.7rem; color: #fff; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">3. Infraestructura & SEO</p>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.75rem;">
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.4rem 0; color: var(--text-dim);">Caching/Performance Vercel</td>
+                                    <td style="text-align: right; color: #fff;">$120.00</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.4rem 0; color: var(--text-dim);">Microdatos JSON-LD (IA Ready)</td>
+                                    <td style="text-align: right; color: #fff;">$100.00</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.4rem 0; color: var(--text-dim);">Optimización Safari/iOS</td>
+                                    <td style="text-align: right; color: #fff;">$80.00</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem 0; font-weight: 700; color: var(--accent); font-size: 0.9rem;">Subtotal Valores Extra</td>
+                                    <td style="text-align: right; font-weight: 800; color: var(--accent); font-size: 0.9rem;">$1,750.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RESUMEN FINAL -->
+                <div style="margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 2rem;">
+                    <div style="display: flex; justify-content: space-between; padding: 1rem 0;">
+                        <span style="font-weight: 600; color: var(--text-dim);">Valuación Total del Proyecto V4</span>
+                        <span style="font-weight: 900; font-size: 1.3rem; color: #fff;">$4,250.00</span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 2px solid var(--border);">
+                        <span style="color: var(--accent); font-weight: 600;">Total Abonos Recibidos (2026)</span>
+                        <span style="color: var(--accent); font-weight: 900; font-size: 1.3rem;">- $1,800.00</span>
+                    </div>
+
+                    <div
+                        style="margin-top: 3rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%); border-radius: 30px; padding: 3rem; border: 1px solid rgba(16, 185, 129, 0.4); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.8rem;">
+                                <div
+                                    style="width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent);">
+                                </div>
+                                <p
+                                    style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent); font-weight: 900; letter-spacing: 0.15em;">
+                                    Información Administrativa</p>
+                            </div>
+                            <h3 style="font-size: 1.6rem; color: #fff; font-family: 'Outfit'; font-weight: 800;">Saldo
+                                Pendiente de Cierre</h3>
+                            <p
+                                style="font-size: 0.85rem; color: var(--text-dim); margin-top: 0.5rem; max-width: 400px;">
+                                Hito de entrega definitiva de manuales de infraestructura y control de dominios.</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="display: flex; align-items: baseline; gap: 8px; justify-content: flex-end;">
+                                <span
+                                    style="font-size: 1.5rem; font-weight: 400; color: var(--text-dim); font-family: 'Outfit';">$</span>
+                                <p
+                                    style="font-size: 4.5rem; font-weight: 950; font-family: 'Outfit'; color: #fff; line-height: 1;">
+                                    2,450</p>
+                            </div>
+                            <p
+                                style="font-size: 0.9rem; color: var(--accent); font-weight: 800; letter-spacing: 0.1em; margin-top: 0.5rem;">
+                                USD</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JUSTIFICACIÓN DE VALOR -->
+                <div
+                    style="margin-top: 3rem; padding: 2rem; background: rgba(59, 130, 246, 0.05); border-radius: 20px; border: 1px solid rgba(59, 130, 246, 0.2);">
+                    <p style="font-size: 0.9rem; color: #fff; font-weight: 600; margin-bottom: 0.5rem;">💡 Perspectiva
+                        de Mercado</p>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
+                        La valuación de $4,250 USD representa menos de la mitad del valor real en el mercado
+                        internacional para una infraestructura de este calibre tecnológico ($8k - $15k USD). Prointeca
+                        adquiere un activo digital de clase mundial optimizado para la era de la IA a una fracción del
+                        costo operativo estándar.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL HANDOVER -->
+    <section id="handover" style="background: var(--bg-surface);">
+        <div class="date-stamp">HANDOVER PROTOCOL: ASSETS VERIFIED</div>
+        <div class="content-wrapper">
+            <h2 class="section-title">Protocolo de Entrega & Activos de Control</h2>
+            <p style="color: var(--text-dim); margin-bottom: 3rem;">Transferencia de propiedad técnica y credenciales de
+                administración del ecosistema.</p>
+
+            <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <!-- Google Search Console -->
+                <div class="glass-card" style="padding: 2rem; transition: transform 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🔍</div>
+                    <h4 style="color: #fff; margin-bottom: 1rem; font-family: 'Outfit';">Google Search Console</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">Propiedad del dominio
+                        verificada mediante registros DNS. Indexación activa para todos los prefijos Prointeca.</p>
+                    <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 8px;">
+                        <div
+                            style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;">
+                        </div>
+                        <span
+                            style="font-size: 0.7rem; color: #10b981; font-weight: 800; text-transform: uppercase;">Estado:
+                            Verificado (DNS)</span>
+                    </div>
+                </div>
+
+                <!-- Vercel Infrastructure -->
+                <div class="glass-card" style="padding: 2rem; transition: transform 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">⚡</div>
+                    <h4 style="color: #fff; margin-bottom: 1rem; font-family: 'Outfit';">Infraestructura Cloud</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">Despliegue global en Vercel
+                        Edge Runtime. Proceso de CI/CD vinculado automáticamente al repositorio.</p>
+                    <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 8px;">
+                        <div
+                            style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;">
+                        </div>
+                        <span
+                            style="font-size: 0.7rem; color: #10b981; font-weight: 800; text-transform: uppercase;">Estado:
+                            Operativo (99.99%)</span>
+                    </div>
+                </div>
+
+                <!-- Domain Control -->
+                <div class="glass-card" style="padding: 2rem; transition: transform 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🌐</div>
+                    <h4 style="color: #fff; margin-bottom: 1rem; font-family: 'Outfit';">Control de Dominio</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">prointeca.com.ve gestionado
+                        vía NIC.ve. Registros MX configurados para Gmail corporativo.</p>
+                    <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 8px;">
+                        <div
+                            style="width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; box-shadow: 0 0 10px #f59e0b;">
+                        </div>
+                        <span
+                            style="font-size: 0.7rem; color: #f59e0b; font-weight: 800; text-transform: uppercase;">Estado:
+                            Gestión NIC.ve</span>
+                    </div>
+                </div>
+
+                <!-- Repository Access -->
+                <div class="glass-card" style="padding: 2rem; transition: transform 0.3s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">📦</div>
+                    <h4 style="color: #fff; margin-bottom: 1rem; font-family: 'Outfit';">Código Fuente Git</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">Repositorio privado en
+                        GitHub (prointeca-v4) y entrega de activos multimedia vía Google Drive. Incluye manuales de despliegue.</p>
+                    <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 8px;">
+                        <div
+                            style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;">
+                        </div>
+                        <span
+                            style="font-size: 0.7rem; color: #10b981; font-weight: 800; text-transform: uppercase;">Estado:
+                            Entrega de LLAVE</span>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 4rem; padding: 2.5rem; background: rgba(59, 130, 246, 0.03); border-radius: 30px; border: 1px dashed rgba(59, 130, 246, 0.3);">
+                <h5
+                    style="color: #fff; margin-bottom: 1.5rem; font-family: 'Outfit'; font-weight: 700; letter-spacing: 0.05em; display: flex; align-items: center; gap: 10px;">
+                    <span style="color: var(--primary-bright);">⚙️</span> Nota sobre Escalabilidad y Sostenibilidad
+                </h5>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">
+                        <strong style="color: #fff; display: block; margin-bottom: 0.5rem;">01. Independencia
+                            Total:</strong>
+                        La arquitectura en código puro (sin WordPress) garantiza que Prointeca no dependa de licencias
+                        de terceros ni actualizaciones de plugins vulnerables para mantener su visibilidad.
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">
+                        <strong style="color: #fff; display: block; margin-bottom: 0.5rem;">02. Mantenimiento
+                            Zero-Cost:</strong>
+                        Al estar optimizado para el Edge Runtime, los costos mensuales de infraestructura se mantienen
+                        en $0 para el volumen de tráfico actual del sector ingeniería.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLOSURE SECTION -->
+    <section id="closure">
+        <div class="hero-bg" style="opacity: 0.15;"></div>
+        <div class="content-wrapper" style="text-align: center;">
+            <h1 class="gradient-text" style="font-size: 4rem; font-weight: 900;">INGENIERÍA <span
+                    style="color: var(--primary);">SIN LÍMITES</span></h1>
+            <p style="font-size: 1.4rem; color: var(--text-dim); max-width: 800px; margin: 2rem auto 5rem auto;">
+                "La tecnología es el pilar sobre el cual se construye la confianza de los socios globales. Prointeca v4
+                es ese pilar para Venezuela."
+            </p>
+
+            <div
+                style="margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border); display: inline-block; min-width: 300px;">
+                <p style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1rem;">
+                    Firma de Conformidad Técnica</p>
+                <p style="font-family: 'Outfit'; font-size: 1.8rem; font-weight: 800; color: var(--primary-bright);">
+                    ING. FREDDY RODRIGUEZ PEREZ</p>
+                <p style="font-size: 0.9rem; font-weight: 600; color: var(--text-dim);">Director de Ingeniería Digital |
+                    WGS</p>
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- Smooth Section Scrolling & Nav Highlight ---
+        const sections = document.querySelectorAll('section');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-target') === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const targetId = dot.getAttribute('data-target');
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // --- GSAP Premium Animations ---
+
+        // Entrance Animations for Section Titles
+        gsap.utils.toArray('.section-title, .badge, .gradient-text').forEach((el) => {
+            gsap.from(el, {
+                scrollTrigger: { trigger: el, start: "top 90%" },
+                y: 30, opacity: 0, duration: 1.2, ease: "power3.out"
+            });
+        });
+
+        // Staggered Entrance for Cards
+        gsap.utils.toArray('.metrics-grid').forEach((grid) => {
+            gsap.from(grid.querySelectorAll('.metric-card'), {
+                scrollTrigger: { trigger: grid, start: "top 85%" },
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "back.out(1.7)",
+                clearProps: "all" // Asegura que las propiedades se limpien tras la animación para evitar problemas de visibilidad
+            });
+        });
+
+        // Hero Parallax
+        gsap.to('.hero-bg', {
+            scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true },
+            y: 200
+        });
+
+        // Gallery Hover Effect Simulation on Scroll
+        gsap.from('.asset-box', {
+            scrollTrigger: { trigger: '.gallery-2026', start: "top 80%" },
+            scale: 0.9, opacity: 0, duration: 1.5, stagger: 0.3, ease: "power4.out"
+        });
+
+        // Table Rows reveal
+        gsap.from('.comp-table tr', {
+            scrollTrigger: { trigger: '.comp-table', start: "top 80%" },
+            x: -50, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power2.out"
+        });
+
+    </script>
+</body>
+
+</html>
