@@ -1,0 +1,44 @@
+
+    <style>
+    /* === LOGO & PRINT QUALITY ENHANCEMENTS === */
+    .prointeca-logo-img {
+        max-height: 52px !important;
+        width: auto !important;
+        object-fit: contain !important;
+        image-rendering: -webkit-optimize-contrast;
+        display: block;
+    }
+    
+    .cover-page .prointeca-logo-img {
+        max-height: 56px !important;
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+    }
+    
+    @media print {
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        
+        .prointeca-logo-img {
+            max-height: 44pt !important;
+            width: auto !important;
+            object-fit: contain !important;
+        }
+        
+        @page {
+            size: letter;
+            margin: 15mm 13mm 18mm 15mm;
+        }
+        
+        body {
+            -webkit-font-smoothing: antialiased !important;
+            text-rendering: optimizeLegibility !important;
+        }
+        
+        .cover-page {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+    }
+    </style>
