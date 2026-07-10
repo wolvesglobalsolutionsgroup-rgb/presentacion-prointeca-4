@@ -1,44 +1,269 @@
+<!-- Logo Improvements & PDF Print Quality CSS -->
+<!-- Include this snippet in the main HTML <head> section -->
 
-    <style>
-    /* === LOGO & PRINT QUALITY ENHANCEMENTS === */
-    .prointeca-logo-img {
-        max-height: 52px !important;
-        width: auto !important;
-        object-fit: contain !important;
-        image-rendering: -webkit-optimize-contrast;
-        display: block;
-    }
-    
-    .cover-page .prointeca-logo-img {
-        max-height: 56px !important;
-        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
-    }
-    
-    @media print {
-        * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
-        
-        .prointeca-logo-img {
-            max-height: 44pt !important;
-            width: auto !important;
-            object-fit: contain !important;
-        }
-        
-        @page {
-            size: letter;
-            margin: 15mm 13mm 18mm 15mm;
-        }
-        
-        body {
-            -webkit-font-smoothing: antialiased !important;
-            text-rendering: optimizeLegibility !important;
-        }
-        
-        .cover-page {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
-    }
-    </style>
+<!-- LOGO MEJORADO: SVG vectorial fiel al logo oficial Prointeca -->
+<!-- Colores: Azul #3B6CB5, Naranja #E87722, Verde #4A7C3F -->
+
+<style>
+/* ============================================================
+   LOGO SVG VECTORIAL MEJORADO - FIEL AL LOGO PROINTECA OFICIAL
+   ============================================================ */
+.prointeca-logo-svg-v2 {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   MEJORAS GLOBALES PARA EXPORTACIÓN PDF DE ALTA CALIDAD
+   Sin distorsiones, sin píxeles rotos, sin overflow
+   ============================================================ */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  @page {
+    size: letter;
+    margin: 15mm 12mm 18mm 12mm;
+  }
+
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    font-size: 9pt !important;
+  }
+
+  /* Evitar corte de imágenes y logos */
+  img, svg {
+    max-width: 100% !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Logo en versión print: usar SVG vectorial (sin px) */
+  .prointeca-logo-img {
+    display: none !important;
+  }
+  .prointeca-logo-svg,
+  .prointeca-logo-svg-v2 {
+    display: block !important;
+    width: 48pt !important;
+    height: 48pt !important;
+  }
+
+  /* Tablas sin overflow ni distorsión */
+  table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    word-wrap: break-word !important;
+    overflow: visible !important;
+    border-collapse: collapse !important;
+    font-size: 7.5pt !important;
+  }
+
+  td, th {
+    overflow: hidden !important;
+    word-break: break-word !important;
+    padding: 4px 5px !important;
+  }
+
+  /* Grillas bento en print: columna única */
+  .bento-grid {
+    display: block !important;
+  }
+  .bento-card {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 8pt !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    padding: 8pt !important;
+  }
+
+  /* Canvas de charts: renderizar en resolución alta */
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Portada print: fondo sólido + colores exactos */
+  .cover-page {
+    background: #001840 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    page-break-after: always !important;
+    height: 260mm !important;
+    min-height: unset !important;
+    padding: 30mm 25mm !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  /* Ocultar elementos interactivos */
+  .top-navbar,
+  .proposal-sidebar,
+  .btn,
+  button {
+    display: none !important;
+  }
+
+  /* Layout principal: full width */
+  .proposal-layout {
+    display: block !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .proposal-body {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Secciones sin sombras */
+  .report-section {
+    box-shadow: none !important;
+    border: none !important;
+    border-top: 1px solid #ccc !important;
+    padding: 10pt 0 !important;
+    margin-bottom: 0 !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Evitar corte en medio de bloques críticos */
+  .section-header,
+  .kpi-card,
+  .alert-box,
+  .highlight-quote,
+  .flow-step,
+  .timeline-item,
+  .dimension-card,
+  .storm-card,
+  .flow-node,
+  h2, h3, h4 {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* Gantt chart en print */
+  .gantt-chart {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Backbone flow: columna en print */
+  .flow-wrapper {
+    flex-direction: column !important;
+    gap: 8pt !important;
+  }
+  .flow-connector {
+    transform: rotate(90deg) !important;
+    margin: 4pt auto !important;
+  }
+
+  /* Solution flow: columna en print */
+  .solution-flow {
+    flex-direction: column !important;
+  }
+
+  /* Dimensiones grid: 2 columnas en print */
+  .dimensions-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6pt !important;
+  }
+
+  /* KPI grid: 2 columnas en print */
+  .kpi-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 6pt !important;
+  }
+
+  /* Storm cards: 3 columnas */
+  .storm-cards-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 6pt !important;
+  }
+
+  /* Backbone flow en print */
+  .backbone-flow .flow-wrapper {
+    display: grid !important;
+    grid-template-columns: 1fr 24pt 1fr 24pt 1fr !important;
+    align-items: center !important;
+    gap: 4pt !important;
+  }
+
+  /* Tipografía print */
+  h1 { font-size: 18pt !important; }
+  h2 { font-size: 13pt !important; }
+  h3 { font-size: 11pt !important; }
+  h4 { font-size: 9.5pt !important; }
+  h5 { font-size: 8.5pt !important; }
+  p  { font-size: 8.5pt !important; }
+
+  /* Cover title en print */
+  .cover-title {
+    font-size: 20pt !important;
+    color: #ffffff !important;
+  }
+  .cover-category {
+    font-size: 9pt !important;
+  }
+  .cover-subtitle {
+    font-size: 11pt !important;
+  }
+  .cover-metadata {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .meta-label { color: rgba(255,255,255,0.6) !important; }
+  .meta-value { color: #ffffff !important; }
+
+  /* Alertas en print */
+  .alert-warning { background: #fffbeb !important; border-left: 3pt solid #b45309 !important; }
+  .alert-danger  { background: #fef2f2 !important; border-left: 3pt solid #dc2626 !important; }
+  .alert-success { background: #f0fdf4 !important; border-left: 3pt solid #16a34a !important; }
+  .alert-brand   { background: #f8faff !important; border-left: 3pt solid #002060 !important; }
+
+  /* Status badges en print */
+  .status-danger  { background: #fee2e2 !important; color: #dc2626 !important; }
+  .status-warning { background: #fef3c7 !important; color: #b45309 !important; }
+  .status-success { background: #dcfce7 !important; color: #16a34a !important; }
+
+  /* Highlight quote en print */
+  .highlight-quote {
+    background: #001840 !important;
+    border-left: 4pt solid #FF6B00 !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Timeline: full width en print */
+  .timeline { max-width: 100% !important; }
+  .timeline::after { left: 20px !important; }
+  .timeline-item { padding-left: 50px !important; }
+  .timeline-item::after { left: 20px !important; }
+
+  /* Methodology flow: ancho completo */
+  .methodology-flow .flow-card {
+    max-width: 100% !important;
+  }
+}
+</style>
