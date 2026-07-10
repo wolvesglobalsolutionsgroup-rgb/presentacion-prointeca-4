@@ -925,12 +925,18 @@
             .report-section {
                 box-shadow: none !important;
                 border: none !important;
-                padding: 1.5rem 0 !important;
+                padding: 1rem 0 !important;
                 margin-bottom: 0 !important;
-                page-break-after: always;
-                break-after: page;
+                page-break-after: auto !important;
+                break-after: auto !important;
                 height: auto !important;
                 overflow: visible !important;
+            }
+            .report-section .section-header {
+                page-break-before: always !important;
+                break-before: page !important;
+                margin-top: 0 !important;
+                padding-top: 1rem !important;
             }
             
             /* Portada en tamaño carta estricto */
@@ -1469,7 +1475,7 @@
                             <h3>Modelo de Gestión</h3>
                         </div>
                         <div>
-                            <div class="bento-metric" style="font-size: 1.45rem; margin-top: 0.35rem; color: var(--navy);">IMCAâRCAâLBCA</div>
+                            <div class="bento-metric" style="font-size: 1.45rem; margin-top: 0.35rem; color: var(--navy);">IMCA→RCA→LBCA</div>
                             <p class="bento-desc" style="margin-bottom: 0;">Ciclo cerrado de maduración técnica del activo orientado a la toma predictiva de decisiones.</p>
                         </div>
                     </div>
@@ -1531,7 +1537,7 @@
                                     <tr>
                                         <td><strong>Inversión extranjera activa en el eje</strong></td>
                                         <td style="text-align: center; font-weight: 700; color: var(--navy);">Activa</td>
-                                        <td>Chevron (â50%), Repsol (triplica), ENI, Shell, BP</td>
+                                        <td>Chevron (↑50%), Repsol (triplica), ENI, Shell, BP</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2039,7 +2045,7 @@
                     </table>
                 </div>
 
-                <h3>4.2 Tramos en condición crítica (AC â¥ 40)</h3>
+                <h3>4.2 Tramos en condición crítica (AC ≥ 40)</h3>
                 <p>Análisis de criticidad ajustado para los tramos del Corredor T-54 de Punta de Mata y laterales:</p>
                 <div class="table-container">
                     <table>
@@ -2940,7 +2946,7 @@
                     </table>
                 </div>
 
-                <h3>7.4 El Modelo Metodológico Corporativo IMCA â RCA â LBCA</h3>
+                <h3>7.4 El Modelo Metodológico Corporativo IMCA → RCA → LBCA</h3>
                 <div class="solution-flow">
                     <div class="flow-step imca">
                         <div class="flow-acronym">IMCA</div>
@@ -2972,19 +2978,19 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="text-align: center; font-weight: 700; color: var(--alert-red);">â Solo una corrida ILI</td>
+                                <td style="text-align: center; font-weight: 700; color: var(--alert-red);">❌ Solo una corrida ILI</td>
                                 <td>Eso es tapar un agujero. Un diagnóstico de espesores sin integración a un sistema de gestión dinámico de integridad mecánica pierde vigencia rápidamente y no mitiga el riesgo a mediano plazo.</td>
                             </tr>
                             <tr>
-                                <td style="text-align: center; font-weight: 700; color: var(--alert-red);">â Solo el GIS</td>
-                                <td>Tener un mapa de localización sin condition assessment mecánico de la metalurgia ni perfiles dinámicos de presión es equivalente a tener un mapa digital sin calles trazadas.</td>
+                                <td style="text-align: center; font-weight: 700; color: var(--alert-red);">❌ Solo el GIS</td>
+                                <td>Tener un mapa de localización sin evaluación de la condición mecánica de la metalurgia ni perfiles dinámicos de presión es equivalente a tener un mapa digital sin calles trazadas.</td>
                             </tr>
                             <tr>
-                                <td style="text-align: center; font-weight: 700; color: var(--alert-red);">â Solo digitalización</td>
+                                <td style="text-align: center; font-weight: 700; color: var(--alert-red);">❌ Solo digitalización</td>
                                 <td>Indexar los archivos PDF históricos sin alinearlos a un sistema informático de control operacional equivale a poseer una gran biblioteca sin un bibliotecario que asista en la consulta.</td>
                             </tr>
                             <tr>
-                                <td style="text-align: center; font-weight: 700; color: var(--alert-red);">â Solo consultoría</td>
+                                <td style="text-align: center; font-weight: 700; color: var(--alert-red);">❌ Solo consultoría</td>
                                 <td>El análisis de datos sin la capacidad operativa y mecánica en campo para reparar físicamente los puntos críticos con soldadura u obturación es papel mojado.</td>
                             </tr>
                         </tbody>
@@ -3166,19 +3172,19 @@
                         <div class="projection-timeline-steps">
                             <div class="proj-step-item">
                                 <div class="proj-step-year">Fase I — Meses 1 - 2</div>
-                                <div>IMCA 1.9 â 2.5. Auditoría del archivo documental (~2,591 planos), reconciliación inicial de nomenclatura del Corredor T-54.</div>
+                                <div>IMCA 1.9 → 2.5. Auditoría del archivo documental (~2,591 planos), reconciliación inicial de nomenclatura del Corredor T-54.</div>
                             </div>
                             <div class="proj-step-item">
                                 <div class="proj-step-year">Fase II — Meses 3 - 6</div>
-                                <div>IMCA 2.5 â 3.5. Mega Corrida ILI (835.6 km) con rascadores de ultra alta resolución. Mapeo de anomalías en tiempo real.</div>
+                                <div>IMCA 2.5 → 3.5. Mega Corrida ILI (835.6 km) con rascadores de ultra alta resolución. Mapeo de anomalías en tiempo real.</div>
                             </div>
                             <div class="proj-step-item">
                                 <div class="proj-step-year">Fase III — Meses 7 - 12</div>
-                                <div>IMCA 3.5 â 4.2. Lanzamiento del WebGIS Corporativo. Carga de 56 archivos GDB e indexación con búsqueda semántica OCR.</div>
+                                <div>IMCA 3.5 → 4.2. Lanzamiento del WebGIS Corporativo. Carga de 56 archivos GDB e indexación con búsqueda semántica OCR.</div>
                             </div>
                             <div class="proj-step-item">
                                 <div class="proj-step-year">Fase IV — Meses 13 - 18</div>
-                                <div>IMCA 4.2 â 4.8. Implantación del Sistema de Gestión de Integridad (ISO 55000 / API RP 1160) y entrega de la Línea Base (LBCA). Riesgo: â CONTROLADO.</div>
+                                <div>IMCA 4.2 → 4.8. Implantación del Sistema de Gestión de Integridad (ISO 55000 / API RP 1160) y entrega de la Línea Base (LBCA). Riesgo: ✅ CONTROLADO.</div>
                             </div>
                         </div>
                     </div>
@@ -3202,8 +3208,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 50%; text-align: center; background-color: rgba(22, 163, 74, 0.05); color: var(--alert-green);">â Hacer esto:</th>
-                                <th style="width: 50%; text-align: center; background-color: rgba(220, 38, 38, 0.05); color: var(--alert-red);">â O esperar esto:</th>
+                                <th style="width: 50%; text-align: center; background-color: rgba(22, 163, 74, 0.05); color: var(--alert-green);">✅ Hacer esto:</th>
+                                <th style="width: 50%; text-align: center; background-color: rgba(220, 38, 38, 0.05); color: var(--alert-red);">❌ O esperar esto:</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -3463,7 +3469,7 @@
     <!-- PRINT FOOTER -->
     <footer style="margin-top: 3rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; text-align: center; font-size: 0.75rem; color: var(--text-sec);">
         <p>Documento técnico preparado por Prointeca C.A. como parte del estudio de Fortalecimiento del Conocimiento de los Activos de la Gerencia de Coordinación Operacional — Dirección Ejecutiva de Producción Oriente (CODEPO), PDVSA EyP Oriente.</p>
-        <p>Basado en: auditoría documental CODEPO, investigación web de contexto país, Modelo Corporativo IMCAâRCAâLBCA, estándares ISO 55000, API RP 1160, ASME B31.4/B31.8S, normas PDVSA PI-02-01/PI-02-09, y PIT-Propuesta Técnica CODEPO.</p>
+        <p>Basado en: auditoría documental CODEPO, investigación web de contexto país, Modelo Corporativo IMCA→RCA→LBCA, estándares ISO 55000, API RP 1160, ASME B31.4/B31.8S, normas PDVSA PI-02-01/PI-02-09, y PIT-Propuesta Técnica CODEPO.</p>
         <p style="margin-top: 0.5rem; font-weight: 700; color: var(--orange-dark);">CONFIDENCIAL — USO EXCLUSIVO GERENCIA CODEPO</p>
     </footer>
 
